@@ -1,0 +1,46 @@
+{
+  "name": "raspberryPiSystemStatus",
+  "version": "0.0.0-alpha0",
+  "description": "simple fast utf-8 console/shell",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Soldy/systat.git"
+  },
+  "keywords": [
+    "raspberry pi system status",
+    "raspberry system status",
+    "pi system status",
+    "system status",
+    "raspberry pi status",
+    "raspberry status",
+    "pi status",
+    "status",
+    "raspberry pi stat",
+    "raspberry stat",
+    "pi stat",
+    "stat",
+    "raspi system stat",
+    "raspi stat",
+    "raspi system stat",
+    "raspi stat",
+    "raspi system status",
+    "raspi status",
+    "raspi system status",
+    "raspi status",
+    "raspberry pi system stat",
+    "raspberry system stat",
+    "pi system stat",
+    "system stat",
+    "raspberry pi system stat",
+    "system status"
+  ],
+  "author": "Soldy",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/Soldy/systat/issues"
+  }
+}
