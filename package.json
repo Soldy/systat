@@ -1,7 +1,7 @@
 {
   "name": "raspberryPiSystemStatus",
   "version": "0.0.0-alpha0",
-  "description": "simple fast utf-8 console/shell",
+  "description": "paspberry pi system status",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
