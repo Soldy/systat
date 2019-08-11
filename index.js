@@ -1,23 +1,38 @@
 const fs = require('fs');
 
-// 5583 0 6131 857838 1414 0 266 0 0 0
-const calc = function(inp){
-    return (100-(
-        (inp[4]*100)/(inp[1]+inp[2]+inp[3]+inp[4]+inp[5]+inp[6]+inp[7]+inp[8]+inp[9]+inp[10])
+const cpuCalc = function(inp){
+    return (100-(                            
+         Math.floor(                         
+              (parseInt(inp[4])*100)/(       
+                  parseInt(inp[1])+          
+                  parseInt(inp[2])+          
+                  parseInt(inp[3])+          
+                  parseInt(inp[4])+           
+                  parseInt(inp[5])+           
+                  parseInt(inp[6])+           
+                  parseInt(inp[7])+           
+                  parseInt(inp[8])+           
+                  parseInt(inp[9])+           
+                  parseInt(inp[10])           
+             )                                
+        )                                     
         ));
 }
-
-
 exports.stat={
-    cpu:function(){
+    cpuTemp:function(){
+        let cpuTemp = parseInt(fs.readFileSync('/sys/class/thermal/thermal_zone0/temp')),
+            cpuTemp1=(cpuTemp/1000),
+            cpuTemp2=(cpuTemp/100),
+            cpuTempM=(cpuTemp2 % cpuTemp1);
+         return parseInt(cpuTemp1).toString()+"."+parseInt(cpuTempM).toString()
+    },
+    cpuUsage:function(){
         let readStat = fs.readFileSync('/proc/stat'),
             out={};
         readStat = readStat.toString().split("\n");
         for(let i = 0 ; readStat.length > i ; i++){
             readStat[i] = readStat[i].split(" ");
-            if (readStat[i][0] === 'cpu'){
-               out['all'] = calc(readStat[i]);
-            }else if(
+            if(
                 (readStat[i][0] === 'cpu0')||
                 (readStat[i][0] === 'cpu1')||
                 (readStat[i][0] === 'cpu2')||
@@ -49,10 +64,10 @@ exports.stat={
                 (readStat[i][0] === 'cpu28')||
                 (readStat[i][0] === 'cpu29')
             ){
-                out[readStat[i][0]] = calc(readStat[i]);
+                out[readStat[i][0]] = cpuCalc(readStat[i]);
             }
-            console.log(readStat[i]);
         }
+
         return out;
     }
 }
