@@ -1,4 +1,5 @@
-const cpu = require('./index.js').stat.cpu;
+const stat = require('./index.js').stat;
 
-console.log(cpu());
+console.log(stat.cpuTemp());
+console.log(stat.cpuUsage());
 
