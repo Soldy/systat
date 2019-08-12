@@ -1,4 +1,6 @@
 const fs = require('fs');
+const spawnSync = require('child_process').spawnSync;
+
 
 const cpuCalc = function(inp){
     if(inp[1] == '')
@@ -23,6 +25,14 @@ const cpuCalc = function(inp){
 
 
 exports.stat={
+    gpuTemp:function(){
+        return parseFloat(
+            spawnSync(
+                '/opt/vc/bin/vcgencmd',
+                ['measure_temp']
+            ).stdout.toString().split("=")[1]
+        );
+    },
     cpuTemp:function(){
         let cpuTemp = parseInt(fs.readFileSync('/sys/class/thermal/thermal_zone0/temp')),
             cpuTemp1=parseInt(cpuTemp/1000),
