@@ -25,10 +25,10 @@ const cpuCalc = function(inp){
 exports.stat={
     cpuTemp:function(){
         let cpuTemp = parseInt(fs.readFileSync('/sys/class/thermal/thermal_zone0/temp')),
-            cpuTemp1=(cpuTemp/1000),
-            cpuTemp2=(cpuTemp/100),
+            cpuTemp1=parseInt(cpuTemp/1000),
+            cpuTemp2=parseInt(cpuTemp/100),
             cpuTempM=(cpuTemp2 % cpuTemp1);
-         return parseInt(cpuTemp1).toString()+"."+parseInt(cpuTempM).toString()
+         return parseInt(cpuTemp1).toString()+"."+parseInt(cpuTempM).toString();
     },
     cpuUsage:function(){
         let readStat = fs.readFileSync('/proc/stat'),
