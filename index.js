@@ -1,8 +1,7 @@
 const fs = require('fs');
 const spawnSync = require('child_process').spawnSync;
 
-
-const cpuCalc = function(inp){
+const calc = (inp)=>{
     if(inp[1] == '')
         inp.splice(1,1);
     return (100-(
@@ -20,12 +19,12 @@ const cpuCalc = function(inp){
                   parseInt(inp[10])
              )
         )
-    ));
+        ));
 }
 
 
 exports.stat={
-    gpuTemp:function(){
+    gpuTemp:()=>{
         return parseFloat(
             spawnSync(
                 '/opt/vc/bin/vcgencmd',
@@ -33,14 +32,14 @@ exports.stat={
             ).stdout.toString().split("=")[1]
         );
     },
-    cpuTemp:function(){
+    cpuTemp:()=>{
         let cpuTemp = parseInt(fs.readFileSync('/sys/class/thermal/thermal_zone0/temp')),
             cpuTemp1=parseInt(cpuTemp/1000),
             cpuTemp2=parseInt(cpuTemp/100),
             cpuTempM=(cpuTemp2 % cpuTemp1);
-         return parseInt(cpuTemp1).toString()+"."+parseInt(cpuTempM).toString();
+         return parseInt(cpuTemp1).toString()+"."+parseInt(cpuTempM).toString()
     },
-    cpuUsage:function(){
+    cpuUsage:()=>{
         let readStat = fs.readFileSync('/proc/stat'),
             out={};
         readStat = readStat.toString().split("\n");
@@ -48,9 +47,7 @@ exports.stat={
             readStat[i] = readStat[i].split(" ");
             if (readStat[i][0] === 'cpu'){
                out['all'] = calc(readStat[i]);
-            }else if(
-                (readStat[i][0].substring(0,3) === 'cpu')
-            ){
+            }else if(readStat[i][0].substring(0,3) === 'cpu'){
                 out[readStat[i][0]] = calc(readStat[i]);
             }
         }
@@ -58,5 +55,4 @@ exports.stat={
         return out;
     }
 }
-
 
