@@ -1,5 +1,5 @@
 {
-  "name": "raspberryPiSystemStatus",
+  "name": "raspberry-pi-systat",
   "version": "0.0.0-alpha0",
   "description": "paspberry pi system status",
   "main": "index.js",
