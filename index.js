@@ -1,6 +1,9 @@
 const fs = require('fs');
 const spawnSync = require('child_process').spawnSync;
 
+
+
+
 const calc = (inp)=>{
     if(inp[1] == '')
         inp.splice(1,1);
@@ -33,11 +36,11 @@ exports.stat={
         );
     },
     cpuTemp:()=>{
-        let cpuTemp = parseInt(fs.readFileSync('/sys/class/thermal/thermal_zone0/temp')),
-            cpuTemp1=parseInt(cpuTemp/1000),
-            cpuTemp2=parseInt(cpuTemp/100),
-            cpuTempM=(cpuTemp2 % cpuTemp1);
-         return parseInt(cpuTemp1).toString()+"."+parseInt(cpuTempM).toString()
+         return (
+              Math.round(
+                  fs.readFileSync('/sys/class/thermal/thermal_zone0/temp')/10)
+                  /100
+            );
     },
     cpuUsage:()=>{
         let readStat = fs.readFileSync('/proc/stat'),
